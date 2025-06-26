@@ -1,0 +1,6 @@
+@EnergyPortal.API_HostAddress = http://localhost:5216
+
+GET {{EnergyPortal.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
