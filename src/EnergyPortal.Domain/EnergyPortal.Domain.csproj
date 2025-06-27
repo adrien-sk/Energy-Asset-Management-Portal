@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Asset\" />
+    <Folder Include="Common\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Alert\" />
+    <Folder Include="Measurement\" />
+    <Folder Include="Site\" />
+  </ItemGroup>
+
 </Project>
