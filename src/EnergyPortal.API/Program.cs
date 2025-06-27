@@ -1,10 +1,13 @@
+using EnergyPortal.API;
 using EnergyPortal.Application;
+using EnergyPortal.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-	.AddOpenApi()
-	.AddApplication();
+	.AddPresentation()
+	.AddApplication()
+	.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
@@ -15,7 +18,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
- 
+
 
 
 
