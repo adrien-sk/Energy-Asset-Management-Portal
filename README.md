@@ -5,6 +5,14 @@ A comprehensive energy asset management platform for monitoring and maintaining 
 > This project is an end-to-end demonstration of modern clean architecture and cloud-ready tooling in the context of renewable energy optimization.
 > It is actively evolving, and this README will be updated as planning, implementation, and features progress.
 
+## 📅 Status
+
+🔧 In progress
+  - Setting up Domain layer and entities, API routes, Commands and Queries
+
+![image](docs/domain_entities.png)
+
+
 ## 🧩 Tech Stack Overview
 
 ### 🔧 Backend
@@ -36,8 +44,3 @@ A comprehensive energy asset management platform for monitoring and maintaining 
   - View site status and performance
   - Log and visualize measurements
   - Receive and manage alerts
-
-## 📅 Status
-
-🔧 In progress — setting up domain layer, API routes, and UI scaffolding  
-🧪 Initial unit tests for domain logic are being added  
