@@ -11,10 +11,4 @@ public class Site : BaseEntity
 
 	// Private constructor for EF Core
 	private Site() { }
-
-	public Site(string name)
-	{
-		Name = name;
-		InstallationDate = DateTime.Now;
-	}
 }

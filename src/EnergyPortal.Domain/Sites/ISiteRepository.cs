@@ -2,6 +2,9 @@
 
 public interface ISiteRepository
 {
-	Task<List<Site>> GetSites();
-	Task<Site> AddSite(Site site);
+	Task<IEnumerable<Site>> GetSites();
+	Task<Site> GetSite(Guid id);
+	Task<Guid> CreateSite(Site site);
+	Task<Guid> UpdateSite(Guid id, Site site);
+	Task<Guid> DeleteSite(Guid id);
 }
