@@ -3,6 +3,7 @@
 public enum EnergyUnit
 {
 	WattsHours,
+	KiloWattsHours,
 	MegaWattsHours,
 	GigaWattsHours
 }

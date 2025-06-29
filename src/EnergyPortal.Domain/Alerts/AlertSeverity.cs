@@ -1,4 +1,4 @@
-﻿namespace EnergyPortal.Domain.Alert;
+﻿namespace EnergyPortal.Domain.Alerts;
 
 public enum AlertSeverity
 {

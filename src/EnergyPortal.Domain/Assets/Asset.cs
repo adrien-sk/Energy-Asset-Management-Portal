@@ -1,7 +1,7 @@
 ﻿using EnergyPortal.Domain.Common;
 using EnergyPortal.Domain.Common.ValueObjects;
 
-namespace EnergyPortal.Domain.Asset;
+namespace EnergyPortal.Domain.Assets;
 public abstract class Asset : BaseEntity
 {
 	public string Name { get; protected set; } = string.Empty;

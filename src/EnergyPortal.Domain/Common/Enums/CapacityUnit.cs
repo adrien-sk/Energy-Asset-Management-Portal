@@ -2,6 +2,7 @@
 
 public enum CapacityUnit
 {
+	Watts,
 	KiloWatts,
 	MegaWatts,
 	GigaWatts

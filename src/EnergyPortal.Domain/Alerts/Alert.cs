@@ -1,6 +1,6 @@
 ﻿using EnergyPortal.Domain.Common;
 
-namespace EnergyPortal.Domain.Alert;
+namespace EnergyPortal.Domain.Alerts;
 
 public class Alert : BaseEntity
 {

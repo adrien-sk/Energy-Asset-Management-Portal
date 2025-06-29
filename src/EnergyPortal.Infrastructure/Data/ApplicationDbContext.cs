@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EnergyPortal.Domain.Sites;
+using Microsoft.EntityFrameworkCore;
 
 namespace EnergyPortal.Infrastructure.Data;
 
@@ -9,5 +10,5 @@ public class ApplicationDbContext : DbContext
 
 	}
 
-	//public DbSet<Sites> Sites { get; set; }
+	public DbSet<Site> Sites { get; set; }
 }

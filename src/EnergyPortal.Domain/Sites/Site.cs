@@ -1,7 +1,7 @@
 ﻿using EnergyPortal.Domain.Common;
 using EnergyPortal.Domain.Common.ValueObjects;
 
-namespace EnergyPortal.Domain.Site;
+namespace EnergyPortal.Domain.Sites;
 
 public class Site : BaseEntity
 {
@@ -11,5 +11,13 @@ public class Site : BaseEntity
 	public DateTime? InstallationDate { get; private set; }
 
 	// Private constructor for EF Core
-	private Site() { }
+	//private Site() { }
+
+	public Site(string name, Location location, Capacity totalCapacity)
+	{
+		Location = location;
+		Name = name;
+		TotalCapacity = totalCapacity;
+		InstallationDate = DateTime.Now;
+	}
 }

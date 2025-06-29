@@ -1,4 +1,6 @@
-﻿using EnergyPortal.Infrastructure.Data;
+﻿using EnergyPortal.Domain.Sites;
+using EnergyPortal.Infrastructure.Data;
+using EnergyPortal.Infrastructure.Sites;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,8 @@ public static class DependencyInjection
 		{
 			options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 		});
+
+		services.AddScoped<ISiteRepository, SiteRepository>();
 
 		return services;
 	}

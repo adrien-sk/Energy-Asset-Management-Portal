@@ -1,7 +1,7 @@
 ﻿using EnergyPortal.Domain.Common;
 using EnergyPortal.Domain.Common.ValueObjects;
 
-namespace EnergyPortal.Domain.Measurement;
+namespace EnergyPortal.Domain.Measurements;
 
 public class Measurement : BaseEntity
 {

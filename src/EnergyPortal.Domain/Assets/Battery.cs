@@ -1,4 +1,4 @@
-﻿namespace EnergyPortal.Domain.Asset;
+﻿namespace EnergyPortal.Domain.Assets;
 
 public class Battery : Asset
 {
