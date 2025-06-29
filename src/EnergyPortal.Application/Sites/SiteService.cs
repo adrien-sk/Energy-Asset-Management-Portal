@@ -11,8 +11,13 @@ public class SiteService : ISiteService
 		_siteRepository = siteRepository;
 	}
 
-	public List<Site> GetSites()
+	public async Task<List<Site>> GetSites()
 	{
-		return _siteRepository.GetSites();
+		return await _siteRepository.GetSites();
+	}
+
+	public async Task<Site> AddSite(Site site)
+	{
+		return await _siteRepository.AddSite(site);
 	}
 }

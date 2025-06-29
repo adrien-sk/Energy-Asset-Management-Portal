@@ -16,9 +16,16 @@ public class SiteController : ControllerBase
 	}
 
 	[HttpGet]
-	public ActionResult<List<Site>> Get()
+	public async Task<ActionResult<List<Site>>> GetSites()
 	{
-		var sites = _siteService.GetSites();
+		var sites = await _siteService.GetSites();
+		return Ok(sites);
+	}
+
+	[HttpPost]
+	public async Task<ActionResult<Site>> AddSite(Site site)
+	{
+		var sites = await _siteService.AddSite(site);
 		return Ok(sites);
 	}
 }

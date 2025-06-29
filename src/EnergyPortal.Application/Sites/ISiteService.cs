@@ -4,5 +4,6 @@ namespace EnergyPortal.Application.Sites;
 
 public interface ISiteService
 {
-	List<Site> GetSites();
+	Task<List<Site>> GetSites();
+	Task<Site> AddSite(Site site);
 }

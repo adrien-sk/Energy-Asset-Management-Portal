@@ -1,5 +1,6 @@
 ﻿using EnergyPortal.Domain.Sites;
 using EnergyPortal.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace EnergyPortal.Infrastructure.Sites;
 
@@ -12,14 +13,18 @@ public class SiteRepository : ISiteRepository
 		_context = context;
 	}
 
-	public List<Site> GetSites()
+	public async Task<List<Site>> GetSites()
 	{
-		var sites = new List<Site>
-		{
-			new("Test", new Domain.Common.ValueObjects.Location(){ }, new Domain.Common.ValueObjects.Capacity(){ }),
-			new("Test 2", new Domain.Common.ValueObjects.Location(){ }, new Domain.Common.ValueObjects.Capacity(){ })
-		};
+		var sites = await _context.Sites.ToListAsync();
 
 		return sites;
+	}
+
+	public async Task<Site> AddSite(Site site)
+	{
+		await _context.Sites.AddAsync(site);
+		await _context.SaveChangesAsync();
+
+		return site;
 	}
 }

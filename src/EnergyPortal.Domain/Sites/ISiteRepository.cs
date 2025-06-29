@@ -2,5 +2,6 @@
 
 public interface ISiteRepository
 {
-	List<Site> GetSites();
+	Task<List<Site>> GetSites();
+	Task<Site> AddSite(Site site);
 }
