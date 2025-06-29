@@ -5,12 +5,14 @@ A comprehensive energy asset management platform for monitoring and maintaining 
 > This project is an end-to-end demonstration of modern clean architecture and cloud-ready tooling in the context of renewable energy optimization.
 > It is actively evolving, and this README will be updated as planning, implementation, and features progress.
 
-## 📅 Status
+## 🚀 Project Goals
 
-🔧 In progress
-  - Setting up Domain layer and entities, API routes, Commands and Queries
-
-![image](docs/domain_entities.png)
+- Build a realistic, production-quality backend following **Domain-Driven Design (DDD)** and **Clean Architecture**
+- Implement **full CRUD operations** for managing energy sites, measurements, and alerts
+- Provide a modern frontend dashboard to:
+  - View site status and performance
+  - Log and visualize measurements
+  - Receive and manage alerts
 
 
 ## 🧩 Tech Stack Overview
@@ -36,11 +38,21 @@ A comprehensive energy asset management platform for monitoring and maintaining 
 - Docker & Docker Compose for local orchestration
 - GitHub Actions (planned) for CI/CD
 
-## 🚀 Project Goals
 
-- Build a realistic, production-quality backend following **Domain-Driven Design (DDD)** and **Clean Architecture**
-- Implement **full CRUD operations** for managing energy sites, measurements, and alerts
-- Provide a modern frontend dashboard to:
-  - View site status and performance
-  - Log and visualize measurements
-  - Receive and manage alerts
+## 📅 Status
+
+🔧 In progress
+  - ~~Define Domain layers and entities, API routes, Commands and Queries~~
+  - ~~Wire up basic API to DB CRUD operation for Site~~, Assets, Alerts, Measurements
+  - Implement CQRS Commands and Queries
+  - Implement proper API Logging and Error handling
+  - [ ... ]
+
+
+### 🔧 Event Storming
+
+As part of the Domain Driven Design approach, I wanted to do the exercise of going through an Event Storming session around the domain of Energy asset management. Even if I have pretty basics knowledge about this domain, here is a draft diagram of the outcome that leads to define some Aggregates for entities, Commands and Events.
+
+
+![image](docs/event_storming.png)
+
