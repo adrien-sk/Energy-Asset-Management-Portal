@@ -1,7 +1,6 @@
-﻿using EnergyPortal.Domain.Assets;
+﻿namespace EnergyPortal.Domain.Assets;
 
-namespace EnergyPortal.Application.Assets;
-public interface IAssetsService
+public interface IAssetsRepository
 {
 	Task<IEnumerable<Asset>> GetAssets();
 	Task<Asset> GetAsset(Guid id);

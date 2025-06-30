@@ -1,4 +1,6 @@
-﻿using EnergyPortal.Domain.Sites;
+﻿using EnergyPortal.Domain.Assets;
+using EnergyPortal.Domain.Sites;
+using EnergyPortal.Infrastructure.Assets;
 using EnergyPortal.Infrastructure.Data;
 using EnergyPortal.Infrastructure.Sites;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +19,7 @@ public static class DependencyInjection
 		});
 
 		services.AddScoped<ISitesRepository, SitesRepository>();
+		services.AddScoped<IAssetsRepository, AssetsRepository>();
 
 		return services;
 	}

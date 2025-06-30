@@ -18,28 +18,28 @@ public class AssetsController : ControllerBase
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<Asset>>> GetAssets()
 	{
-		var Assets = await _assetsService.GetAssets();
-		return Ok(Assets);
+		var assets = await _assetsService.GetAssets();
+		return Ok(assets);
 	}
 
 	[HttpGet("{id}")]
 	public async Task<ActionResult<Asset>> GetAsset(Guid id)
 	{
-		var Asset = await _assetsService.GetAsset(id);
-		return Ok(Asset);
+		var asset = await _assetsService.GetAsset(id);
+		return Ok(asset);
 	}
 
 	[HttpPost]
-	public async Task<ActionResult<Guid>> CreateAsset(Asset Asset)
+	public async Task<ActionResult<Guid>> CreateAsset(Asset asset)
 	{
-		var AssetId = await _assetsService.CreateAsset(Asset);
-		return Ok(AssetId);
+		var assetId = await _assetsService.CreateAsset(asset);
+		return Ok(assetId);
 	}
 
 	[HttpPut("{id}")]
-	public async Task<ActionResult<Guid>> UpdateAsset(Guid id, Asset Asset)
+	public async Task<ActionResult<Guid>> UpdateAsset(Asset asset)
 	{
-		var updatedId = await _assetsService.UpdateAsset(id, Asset);
+		var updatedId = await _assetsService.UpdateAsset(asset);
 		return NoContent();
 	}
 

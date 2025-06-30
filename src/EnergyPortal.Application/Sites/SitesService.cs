@@ -26,9 +26,9 @@ public class SitesService : ISitesService
 		return await _sitesRepository.CreateSite(site);
 	}
 
-	public async Task<Guid> UpdateSite(Guid id, Site site)
+	public async Task<Guid> UpdateSite(Site site)
 	{
-		return await _sitesRepository.UpdateSite(id, site);
+		return await _sitesRepository.UpdateSite(site);
 	}
 
 	public async Task<Guid> DeleteSite(Guid id)

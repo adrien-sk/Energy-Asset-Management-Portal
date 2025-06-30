@@ -33,22 +33,28 @@ public class SitesRepository : ISitesRepository
 		return site.Id;
 	}
 
-	public async Task<Guid> UpdateSite(Guid id, Site site)
+	public async Task<Guid> UpdateSite(Site updatedSite)
 	{
-		await _context.Sites.
-			Where(model => model.Id == id)
-			.ExecuteUpdateAsync(setters => setters
-				.SetProperty(s => s.Name, site.Name)
-				.SetProperty(s => s.InstallationDate, site.InstallationDate)
-			);
-		return id;
+		var site = await _context.Sites.FindAsync(updatedSite.Id);
+
+		if (site is not null)
+		{
+			site.Update(updatedSite.Name, updatedSite.Location, updatedSite.InstallationDate, updatedSite.UpdatedBy);
+
+			await _context.SaveChangesAsync();
+		}
+
+		return updatedSite.Id;
 	}
 
 	public async Task<Guid> DeleteSite(Guid id)
 	{
 		var site = await _context.Sites.FindAsync(id);
-		_context.Sites.Remove(site);
-		await _context.SaveChangesAsync();
+		if (site is not null)
+		{
+			_context.Sites.Remove(site);
+			await _context.SaveChangesAsync();
+		}
 		return id;
 	}
 }

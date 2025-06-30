@@ -2,9 +2,7 @@
 
 public class SolarPanel : Asset
 {
-	public decimal TiltAngle { get; private set; }
-	public decimal Azimuth { get; private set; }
+	public decimal TiltAngle { get; set; } = decimal.Zero;
+	public decimal Azimuth { get; set; } = decimal.Zero;
 
-	// Private constructor for EF Core
-	private SolarPanel() { }
 }

@@ -37,9 +37,9 @@ public class SitesController : ControllerBase
 	}
 
 	[HttpPut("{id}")]
-	public async Task<ActionResult<Guid>> UpdateSite(Guid id, Site site)
+	public async Task<ActionResult<Guid>> UpdateSite(Site site)
 	{
-		var updatedId = await _sitesService.UpdateSite(id, site);
+		var updatedId = await _sitesService.UpdateSite(site);
 		return NoContent();
 	}
 

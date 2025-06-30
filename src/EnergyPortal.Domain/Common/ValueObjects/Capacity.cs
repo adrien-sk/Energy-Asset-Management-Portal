@@ -4,6 +4,6 @@ namespace EnergyPortal.Domain.Common.ValueObjects;
 
 public record Capacity
 {
-	public decimal Output { get; }
-	public CapacityUnit Unit { get; }
+	public decimal Output { get; } = decimal.Zero;
+	public CapacityUnit Unit { get; } = CapacityUnit.Watts;
 }
