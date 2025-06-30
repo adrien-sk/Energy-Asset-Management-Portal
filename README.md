@@ -44,8 +44,9 @@ A comprehensive energy asset management platform for monitoring and maintaining 
 🔧 In progress
   - ~~Define Domain layers and entities, API routes, Commands and Queries~~
   - ~~Wire up basic API to DB CRUD operation for Site~~, Assets, Alerts, Measurements
-  - Implement CQRS Commands and Queries
-  - Implement proper API Logging and Error handling
+  - ~~Implement proper Logging and Error handling~~
+  - Implement initial CQRS Commands and Queries
+  - Add Behaviors and validations
   - [ ... ]
 
 
