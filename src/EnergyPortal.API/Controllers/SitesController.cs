@@ -8,46 +8,45 @@ namespace EnergyPortal.API.Controllers;
 [ApiController]
 public class SitesController : ControllerBase
 {
-	private readonly ISiteService _siteService;
+	private readonly ISitesService _sitesService;
 
-	public SitesController(ISiteService siteService)
+	public SitesController(ISitesService sitesService)
 	{
-		_siteService = siteService;
+		_sitesService = sitesService;
 	}
 
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<Site>>> GetSites()
 	{
-		var sites = await _siteService.GetSites();
+		var sites = await _sitesService.GetSites();
 		return Ok(sites);
 	}
 
 	[HttpGet("{id}")]
 	public async Task<ActionResult<Site>> GetSite(Guid id)
 	{
-		var site = await _siteService.GetSite(id);
+		var site = await _sitesService.GetSite(id);
 		return Ok(site);
 	}
 
 	[HttpPost]
 	public async Task<ActionResult<Guid>> CreateSite(Site site)
 	{
-		var siteId = await _siteService.CreateSite(site);
+		var siteId = await _sitesService.CreateSite(site);
 		return Ok(siteId);
 	}
 
 	[HttpPut("{id}")]
 	public async Task<ActionResult<Guid>> UpdateSite(Guid id, Site site)
 	{
-		var updatedId = await _siteService.UpdateSite(id, site);
+		var updatedId = await _sitesService.UpdateSite(id, site);
 		return NoContent();
 	}
 
 	[HttpDelete("{id}")]
 	public async Task<ActionResult<Guid>> DeleteSite(Guid id)
 	{
-		var deletedId = await _siteService.DeleteSite(id);
+		var deletedId = await _sitesService.DeleteSite(id);
 		return NoContent();
 	}
-
 }

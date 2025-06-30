@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EnergyPortal.Infrastructure.Sites;
 
-public class SiteRepository : ISiteRepository
+public class SitesRepository : ISitesRepository
 {
 	private readonly ApplicationDbContext _context;
 
-	public SiteRepository(ApplicationDbContext context)
+	public SitesRepository(ApplicationDbContext context)
 	{
 		_context = context;
 	}

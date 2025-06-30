@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EnergyPortal.Application.Assets;
+using EnergyPortal.Domain.Assets;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EnergyPortal.API.Controllers;
 
@@ -6,35 +8,45 @@ namespace EnergyPortal.API.Controllers;
 [ApiController]
 public class AssetsController : ControllerBase
 {
-	// GET: api/<AssetsController>
+	private readonly IAssetsService _assetsService;
+
+	public AssetsController(IAssetsService assetsService)
+	{
+		_assetsService = assetsService;
+	}
+
 	[HttpGet]
-	public IEnumerable<string> Get()
+	public async Task<ActionResult<IEnumerable<Asset>>> GetAssets()
 	{
-		return new string[] { "value1", "value2" };
+		var Assets = await _assetsService.GetAssets();
+		return Ok(Assets);
 	}
 
-	// GET api/<AssetsController>/5
 	[HttpGet("{id}")]
-	public string Get(int id)
+	public async Task<ActionResult<Asset>> GetAsset(Guid id)
 	{
-		return "value";
+		var Asset = await _assetsService.GetAsset(id);
+		return Ok(Asset);
 	}
 
-	// POST api/<AssetsController>
 	[HttpPost]
-	public void Post([FromBody] string value)
+	public async Task<ActionResult<Guid>> CreateAsset(Asset Asset)
 	{
+		var AssetId = await _assetsService.CreateAsset(Asset);
+		return Ok(AssetId);
 	}
 
-	// PUT api/<AssetsController>/5
 	[HttpPut("{id}")]
-	public void Put(int id, [FromBody] string value)
+	public async Task<ActionResult<Guid>> UpdateAsset(Guid id, Asset Asset)
 	{
+		var updatedId = await _assetsService.UpdateAsset(id, Asset);
+		return NoContent();
 	}
 
-	// DELETE api/<AssetsController>/5
 	[HttpDelete("{id}")]
-	public void Delete(int id)
+	public async Task<ActionResult<Guid>> DeleteAsset(Guid id)
 	{
+		var deletedId = await _assetsService.DeleteAsset(id);
+		return NoContent();
 	}
 }

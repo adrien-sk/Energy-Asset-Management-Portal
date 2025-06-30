@@ -16,7 +16,7 @@ public static class DependencyInjection
 			options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 		});
 
-		services.AddScoped<ISiteRepository, SiteRepository>();
+		services.AddScoped<ISitesRepository, SitesRepository>();
 
 		return services;
 	}

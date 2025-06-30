@@ -1,8 +1,6 @@
-﻿using EnergyPortal.Domain.Sites;
+﻿namespace EnergyPortal.Domain.Sites;
 
-namespace EnergyPortal.Application.Sites;
-
-public interface ISiteService
+public interface ISitesRepository
 {
 	Task<IEnumerable<Site>> GetSites();
 	Task<Site> GetSite(Guid id);

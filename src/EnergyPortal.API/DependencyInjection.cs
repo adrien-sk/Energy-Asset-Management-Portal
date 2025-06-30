@@ -8,7 +8,7 @@ public static class DependencyInjection
 	{
 		services.AddOpenApi();
 		services.AddControllers();
-		services.AddScoped<ISiteService, SiteService>();
+		services.AddScoped<ISitesService, SitesService>();
 
 		return services;
 	}
