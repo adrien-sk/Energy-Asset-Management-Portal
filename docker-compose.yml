@@ -1,0 +1,28 @@
+services:
+  elasticsearch:
+    image: elasticsearch:9.0.2
+    container_name: energy-portal-elasticsearch
+    ports:
+      - 9200:9200
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+    networks:
+      - elk-network
+  kibana:
+    image: kibana:9.0.2
+    container_name: energy-portal-kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - xpack.security.enabled=false
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk-network
+
+networks:
+  elk-network:
+    driver: bridge
