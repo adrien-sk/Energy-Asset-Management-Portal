@@ -35,12 +35,9 @@ public class SitesRepository : ISitesRepository
 
 	public async Task<Guid> UpdateSite(Site updatedSite)
 	{
-		var site = await _context.Sites.FindAsync(updatedSite.Id);
-
-		if (site is not null)
+		if (updatedSite is not null)
 		{
-			site.Update(updatedSite.Name, updatedSite.Location, updatedSite.InstallationDate, updatedSite.UpdatedBy);
-
+			_context.Sites.Update(updatedSite);
 			await _context.SaveChangesAsync();
 		}
 

@@ -1,4 +1,5 @@
-﻿using EnergyPortal.Domain.Sites;
+﻿using EnergyPortal.Application.Sites.Commands.CreateSite;
+using EnergyPortal.Domain.Sites;
 
 namespace EnergyPortal.Application.Sites;
 
@@ -6,7 +7,7 @@ public interface ISitesService
 {
 	Task<IEnumerable<Site>> GetSites();
 	Task<Site> GetSite(Guid id);
-	Task<Guid> CreateSite(Site site);
-	Task<Guid> UpdateSite(Site site);
+	Task<Guid> CreateSite(CreateSiteCommand site);
+	Task<Guid> UpdateSite(Guid id, CreateSiteCommand site);
 	Task<Guid> DeleteSite(Guid id);
 }

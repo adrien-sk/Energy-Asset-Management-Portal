@@ -2,8 +2,8 @@
 
 A comprehensive energy asset management platform for monitoring and maintaining solar power plants and storage batteries. Built with a .NET 8 backend and React + Carbon Design frontend, this project helps track asset performance, detect issues, and optimize energy usage — simulating the kind of tooling used in renewable energy operations.
 
-> This project is an end-to-end demonstration of modern clean architecture and cloud-ready tooling in the context of renewable energy optimization.
-> It is actively evolving, and this README will be updated as planning, implementation, and features progress.
+*This project is an end-to-end demonstration of modern clean architecture and cloud-ready tooling in the context of renewable energy optimization.
+It is actively evolving, and this README will be updated as planning, implementation, and features progress.*
 
 ## 🚀 Project Goals
 
@@ -14,6 +14,17 @@ A comprehensive energy asset management platform for monitoring and maintaining 
   - Log and visualize measurements
   - Receive and manage alerts
 
+## 📅 Status
+
+🔧 In progress
+  - ~~Define Domain layers and entities, API routes, Commands and Queries~~
+  - ~~Wire up basic API to DB CRUD operation for Site~~, Assets, Alerts, Measurements
+  - ~~Implement proper Logging and Error handling~~
+  - ~~Sink logs to Dockerized Elastic-search and Kibana~~
+  - ~~Template Factory pattern implementation for Entity management~~
+  - Implement initial CQRS Commands and Queries leveraging Units of Work
+  - Add Behaviors and validations
+  - [ ... ]
 
 ## 🧩 Tech Stack Overview
 
@@ -24,6 +35,8 @@ A comprehensive energy asset management platform for monitoring and maintaining 
 - Clean Architecture + CQRS using MediatR
 - xUnit for unit and integration testing
 - Swagger/OpenAPI for auto-generated API docs
+- Structured logging to Elastic search with Kibana dashboard
+- Prometheus metrics and Grafana monitoring dashboard
 
 ### 🖥️ Frontend
 
@@ -34,20 +47,9 @@ A comprehensive energy asset management platform for monitoring and maintaining 
 
 ### ☁️ Infrastructure & DevOps
 
-- SQL Server (locally via Docker)
+- SQL Server
 - Docker & Docker Compose for local orchestration
 - GitHub Actions (planned) for CI/CD
-
-
-## 📅 Status
-
-🔧 In progress
-  - ~~Define Domain layers and entities, API routes, Commands and Queries~~
-  - ~~Wire up basic API to DB CRUD operation for Site~~, Assets, Alerts, Measurements
-  - ~~Implement proper Logging and Error handling~~
-  - Implement initial CQRS Commands and Queries
-  - Add Behaviors and validations
-  - [ ... ]
 
 
 ### 🔧 Event Storming

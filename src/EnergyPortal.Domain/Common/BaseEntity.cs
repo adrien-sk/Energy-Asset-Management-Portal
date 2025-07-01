@@ -8,7 +8,13 @@ public abstract class BaseEntity
 	public string? CreatedBy { get; protected set; }
 	public string? UpdatedBy { get; protected set; }
 
+
 	protected BaseEntity() { }
+
+	protected BaseEntity(string createdBy)
+	{
+		CreatedBy = createdBy;
+	}
 
 	public override bool Equals(object? obj)
 	{
@@ -23,9 +29,8 @@ public abstract class BaseEntity
 
 	public override int GetHashCode() => Id.GetHashCode();
 
-	protected void SetCreated(string? createdBy = null)
+	protected void SetCreated(string createdBy)
 	{
-		CreatedAt = DateTime.Now;
 		CreatedBy = createdBy;
 	}
 

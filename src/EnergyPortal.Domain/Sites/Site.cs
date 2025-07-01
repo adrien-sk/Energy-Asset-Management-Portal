@@ -1,38 +1,35 @@
 ﻿using EnergyPortal.Domain.Assets;
 using EnergyPortal.Domain.Common;
-using EnergyPortal.Domain.Common.ValueObjects;
 
 namespace EnergyPortal.Domain.Sites;
 
 public sealed class Site : BaseEntity
 {
-	public string Name { get; set; } = string.Empty!;
-	public Location Location { get; set; } = new();
-	public Capacity TotalCapacity { get; set; } = new();
-	public DateTime? InstallationDate { get; set; }
+	public string Name { get; private set; } = string.Empty!;
+	public Location Location { get; private set; } = default!;
+	//public Capacity TotalCapacity { get; private set; } = default!;
 
 	private readonly List<Asset> _assets = new();
 	public List<Asset> Assets => _assets.ToList();
 
-	public static Site Create(string name, Location location, string? createdBy = null)
-	{
-		var site = new Site()
-		{
-			Name = name,
-			Location = location,
-			TotalCapacity = new Capacity(),
-		};
-		site.SetCreated(createdBy);
+	private Site() { }
 
-		return site;
-	}
-
-	public void Update(string name, Location location, DateTime? installationDate = null, string? updatedBy = null)
+	internal Site(
+		string name,
+		Location location,
+		//Capacity totalCapacity,
+		string createdBy) : base(createdBy)
 	{
 		Name = name;
 		Location = location;
-		TotalCapacity = new Capacity();
-		InstallationDate = installationDate;
+		//TotalCapacity = totalCapacity;
+	}
+
+	public void Update(string name, Location location, string? updatedBy = null)
+	{
+		Name = name;
+		Location = location;
+		//TotalCapacity = new Capacity();
 		SetUpdated(updatedBy);
 	}
 }

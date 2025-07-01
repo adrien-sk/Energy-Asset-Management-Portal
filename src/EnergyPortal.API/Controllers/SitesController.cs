@@ -1,4 +1,5 @@
 ﻿using EnergyPortal.Application.Sites;
+using EnergyPortal.Application.Sites.Commands.CreateSite;
 using EnergyPortal.Domain.Sites;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,16 +31,16 @@ public class SitesController : ControllerBase
 	}
 
 	[HttpPost]
-	public async Task<ActionResult<Guid>> CreateSite(Site site)
+	public async Task<ActionResult<Guid>> CreateSite(CreateSiteCommand site)
 	{
 		var siteId = await _sitesService.CreateSite(site);
 		return Ok(siteId);
 	}
 
 	[HttpPut("{id}")]
-	public async Task<ActionResult<Guid>> UpdateSite(Site site)
+	public async Task<ActionResult<Guid>> UpdateSite(Guid id, CreateSiteCommand site)
 	{
-		var updatedId = await _sitesService.UpdateSite(site);
+		var updatedId = await _sitesService.UpdateSite(id, site);
 		return NoContent();
 	}
 

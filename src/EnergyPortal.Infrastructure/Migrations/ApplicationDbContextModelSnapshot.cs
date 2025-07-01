@@ -92,9 +92,6 @@ namespace EnergyPortal.Infrastructure.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("InstallationDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -220,59 +217,38 @@ namespace EnergyPortal.Infrastructure.Migrations
 
             modelBuilder.Entity("EnergyPortal.Domain.Sites.Site", b =>
                 {
-                    b.OwnsOne("EnergyPortal.Domain.Common.ValueObjects.Location", "Location", b1 =>
+                    b.OwnsOne("EnergyPortal.Domain.Sites.Location", "Location", b1 =>
                         {
                             b1.Property<Guid>("SiteId")
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("Address")
+                                .IsRequired()
                                 .HasMaxLength(500)
                                 .HasColumnType("nvarchar(500)")
-                                .HasColumnName("Location_Address");
+                                .HasColumnName("Address");
 
                             b1.Property<string>("City")
+                                .IsRequired()
                                 .HasMaxLength(500)
                                 .HasColumnType("nvarchar(500)")
-                                .HasColumnName("Location_City");
+                                .HasColumnName("City");
 
                             b1.Property<decimal>("Latitude")
                                 .HasPrecision(10, 7)
                                 .HasColumnType("decimal(10,7)")
-                                .HasColumnName("Location_Latitude");
+                                .HasColumnName("Latitude");
 
                             b1.Property<decimal>("Longitude")
                                 .HasPrecision(10, 7)
                                 .HasColumnType("decimal(10,7)")
-                                .HasColumnName("Location_Longitude");
+                                .HasColumnName("Longitude");
 
                             b1.Property<string>("Region")
+                                .IsRequired()
                                 .HasMaxLength(500)
                                 .HasColumnType("nvarchar(500)")
-                                .HasColumnName("Location_Region");
-
-                            b1.HasKey("SiteId");
-
-                            b1.ToTable("Sites");
-
-                            b1.WithOwner()
-                                .HasForeignKey("SiteId");
-                        });
-
-                    b.OwnsOne("EnergyPortal.Domain.Common.ValueObjects.Capacity", "TotalCapacity", b1 =>
-                        {
-                            b1.Property<Guid>("SiteId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<decimal>("Output")
-                                .HasPrecision(18, 2)
-                                .HasColumnType("decimal(18,2)")
-                                .HasColumnName("TotalCapacity_Output");
-
-                            b1.Property<string>("Unit")
-                                .IsRequired()
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("TotalCapacity_Unit");
+                                .HasColumnName("Region");
 
                             b1.HasKey("SiteId");
 
@@ -283,9 +259,6 @@ namespace EnergyPortal.Infrastructure.Migrations
                         });
 
                     b.Navigation("Location")
-                        .IsRequired();
-
-                    b.Navigation("TotalCapacity")
                         .IsRequired();
                 });
 
