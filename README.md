@@ -16,14 +16,22 @@ It is actively evolving, and this README will be updated as planning, implementa
 
 ## 📅 Status
 
-🔧 In progress
-  - ~~Define Domain layers and entities, API routes, Commands and Queries~~
-  - ~~Wire up basic API to DB CRUD operation for Site~~, Assets, Alerts, Measurements
-  - ~~Implement proper Logging and Error handling~~
-  - ~~Sink logs to Dockerized Elastic-search and Kibana~~
-  - ~~Template Factory pattern implementation for Entity management~~
-  - Implement initial CQRS Commands and Queries leveraging Units of Work
+✅ Done
+  - Setup a Starting solution including :
+    - Clean architecture solution
+    - SQL Server DB and Entity framework
+    - Global error handling middleware + Result pattern error management
+    - Structured logging to dockerized Elasticsearch with Kibana dashboard
+  - Follow DDD to define start point for Domain layers and entities, API routes, Commands and Queries
+  - Basic CRUD API for Sites and Assets
+  - Prepared Factory pattern implementation for Entity management
+  - Add Mediatr for CQRS with Query/Command interface + Implementation for CreateSite + GetSites
+
+🔧 Next Steps
+
+  - Implement Unit Of Work pattern and Cancellation Token
   - Add Behaviors and validations
+  - Implement a Generic Repository for standard CRUD 
   - [ ... ]
 
 ## 🧩 Tech Stack Overview

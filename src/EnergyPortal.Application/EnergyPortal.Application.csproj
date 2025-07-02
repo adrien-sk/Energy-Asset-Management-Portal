@@ -17,7 +17,6 @@
   <ItemGroup>
     <Folder Include="Sites\Commands\DeleteSite\" />
     <Folder Include="Sites\Commands\UpdateSite\" />
-    <Folder Include="Sites\Queries\GetSite\" />
     <Folder Include="Sites\Queries\GetSiteById\" />
   </ItemGroup>
 

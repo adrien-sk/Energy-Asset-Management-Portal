@@ -1,5 +1,6 @@
 ﻿using EnergyPortal.Application.Sites;
 using EnergyPortal.Application.Sites.Commands.CreateSite;
+using EnergyPortal.Application.Sites.Queries.GetSite;
 using EnergyPortal.Domain.Sites;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +19,8 @@ public sealed class SitesController : BaseApiController
 	[HttpGet]
 	public async Task<ActionResult<IEnumerable<Site>>> GetSites()
 	{
-		var sites = await _sitesService.GetSites();
-		return Ok(sites);
+		var result = await Sender.Send(new GetSitesQuery());
+		return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
 	}
 
 	[HttpGet("{id}")]
@@ -32,7 +33,9 @@ public sealed class SitesController : BaseApiController
 	[HttpPost]
 	public async Task<ActionResult<Guid>> CreateSite(CreateSiteCommand site)
 	{
-		return await Sender.Send(site);
+		var result = await Sender.Send(site);
+
+		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
 	}
 
 	[HttpPut("{id}")]

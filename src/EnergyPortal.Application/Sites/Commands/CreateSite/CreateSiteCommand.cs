@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿using EnergyPortal.Application.Common.Commands;
 
 namespace EnergyPortal.Application.Sites.Commands.CreateSite;
 
@@ -8,4 +8,4 @@ public sealed record CreateSiteCommand(
 	decimal Longitude,
 	string Address,
 	string City,
-	string Region) : IRequest<Guid>;
+	string Region) : ICommand<Guid>;
