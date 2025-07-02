@@ -1,11 +1,11 @@
-﻿namespace EnergyPortal.Application.Sites.Commands.CreateSite;
+﻿using MediatR;
 
-public class CreateSiteCommand
-{
-	public string Name { get; set; } = string.Empty!;
-	public decimal Latitude { get; set; }
-	public decimal Longitude { get; set; }
-	public string Address { get; set; } = default!;
-	public string City { get; set; } = default!;
-	public string Region { get; set; } = default!;
-}
+namespace EnergyPortal.Application.Sites.Commands.CreateSite;
+
+public sealed record CreateSiteCommand(
+	string Name,
+	decimal Latitude,
+	decimal Longitude,
+	string Address,
+	string City,
+	string Region) : IRequest<Guid>;

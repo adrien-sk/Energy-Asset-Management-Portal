@@ -14,4 +14,11 @@
     <ProjectReference Include="..\EnergyPortal.Domain\EnergyPortal.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Sites\Commands\DeleteSite\" />
+    <Folder Include="Sites\Commands\UpdateSite\" />
+    <Folder Include="Sites\Queries\GetSite\" />
+    <Folder Include="Sites\Queries\GetSiteById\" />
+  </ItemGroup>
+
 </Project>

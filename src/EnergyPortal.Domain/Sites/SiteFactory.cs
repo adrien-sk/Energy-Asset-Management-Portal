@@ -2,7 +2,7 @@
 
 public class SiteFactory
 {
-	public Site CreateSite(
+	public async Task<Site> CreateSite(
 		string name,
 		Location location,
 		//Capacity totalCapacity,

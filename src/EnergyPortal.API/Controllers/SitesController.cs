@@ -1,17 +1,16 @@
 ﻿using EnergyPortal.Application.Sites;
 using EnergyPortal.Application.Sites.Commands.CreateSite;
 using EnergyPortal.Domain.Sites;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnergyPortal.API.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
-public class SitesController : ControllerBase
+public sealed class SitesController : BaseApiController
 {
 	private readonly ISitesService _sitesService;
 
-	public SitesController(ISitesService sitesService)
+	public SitesController(ISender sender, ISitesService sitesService) : base(sender)
 	{
 		_sitesService = sitesService;
 	}
@@ -33,8 +32,7 @@ public class SitesController : ControllerBase
 	[HttpPost]
 	public async Task<ActionResult<Guid>> CreateSite(CreateSiteCommand site)
 	{
-		var siteId = await _sitesService.CreateSite(site);
-		return Ok(siteId);
+		return await Sender.Send(site);
 	}
 
 	[HttpPut("{id}")]

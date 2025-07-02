@@ -24,18 +24,6 @@ public class SitesService : ISitesService
 		return await _sitesRepository.GetSite(id);
 	}
 
-	public async Task<Guid> CreateSite(CreateSiteCommand site)
-	{
-		var location = new Location(site.Latitude,
-			site.Longitude,
-			site.Address,
-			site.City,
-			site.Region);
-
-		var newSite = _siteFactory.CreateSite(site.Name, location, "Tester");
-		return await _sitesRepository.CreateSite(newSite);
-	}
-
 	public async Task<Guid> UpdateSite(Guid id, CreateSiteCommand site)
 	{
 		var dbSite = await _sitesRepository.GetSite(id);
