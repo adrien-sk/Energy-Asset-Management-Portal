@@ -14,11 +14,6 @@ public class SitesService : ISitesService
 		_siteFactory = siteFactory;
 	}
 
-	public async Task<IEnumerable<Site>> GetSites()
-	{
-		return await _sitesRepository.GetSites();
-	}
-
 	public async Task<Site> GetSite(Guid id)
 	{
 		return await _sitesRepository.GetSite(id);

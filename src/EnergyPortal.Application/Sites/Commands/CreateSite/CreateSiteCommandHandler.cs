@@ -27,7 +27,7 @@ internal sealed class CreateSiteCommandHandler : ICommandHandler<CreateSiteComma
 		var newSite = await _siteFactory.CreateSite(request.Name, location, "Tester");
 		try
 		{
-			var id = await _sitesRepository.CreateSite(newSite);
+			var id = await _sitesRepository.CreateSite(newSite, cancellationToken);
 			return Result.Success(id);
 		}
 		catch (Exception ex)

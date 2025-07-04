@@ -16,7 +16,7 @@ internal sealed class GetSitesQueryHandler : IQueryHandler<GetSitesQuery, IEnume
 
 	public async Task<Result<IEnumerable<Site>>> Handle(GetSitesQuery request, CancellationToken cancellationToken)
 	{
-		var sites = await _sitesRepository.GetSites();
+		var sites = await _sitesRepository.GetSites(cancellationToken);
 
 		if (sites == null)
 		{

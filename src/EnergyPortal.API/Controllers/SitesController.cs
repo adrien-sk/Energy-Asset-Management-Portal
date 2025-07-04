@@ -17,9 +17,9 @@ public sealed class SitesController : BaseApiController
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<Site>>> GetSites()
+	public async Task<ActionResult<IEnumerable<Site>>> GetSites(CancellationToken cancellationToken)
 	{
-		var result = await Sender.Send(new GetSitesQuery());
+		var result = await Sender.Send(new GetSitesQuery(), cancellationToken);
 		return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
 	}
 
@@ -31,9 +31,9 @@ public sealed class SitesController : BaseApiController
 	}
 
 	[HttpPost]
-	public async Task<ActionResult<Guid>> CreateSite(CreateSiteCommand site)
+	public async Task<ActionResult<Guid>> CreateSite(CreateSiteCommand site, CancellationToken cancellationToken)
 	{
-		var result = await Sender.Send(site);
+		var result = await Sender.Send(site, cancellationToken);
 
 		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
 	}

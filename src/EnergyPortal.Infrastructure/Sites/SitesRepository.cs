@@ -13,9 +13,9 @@ public class SitesRepository : ISitesRepository
 		_context = context;
 	}
 
-	public async Task<IEnumerable<Site>> GetSites()
+	public async Task<IEnumerable<Site>> GetSites(CancellationToken cancellationToken)
 	{
-		var sites = await _context.Sites.ToListAsync();
+		var sites = await _context.Sites.ToListAsync(cancellationToken);
 		return sites;
 	}
 
@@ -25,10 +25,10 @@ public class SitesRepository : ISitesRepository
 		return sites;
 	}
 
-	public async Task<Guid> CreateSite(Site site)
+	public async Task<Guid> CreateSite(Site site, CancellationToken cancellationToken)
 	{
-		await _context.Sites.AddAsync(site);
-		await _context.SaveChangesAsync();
+		await _context.Sites.AddAsync(site, cancellationToken);
+		await _context.SaveChangesAsync(cancellationToken);
 
 		return site.Id;
 	}
