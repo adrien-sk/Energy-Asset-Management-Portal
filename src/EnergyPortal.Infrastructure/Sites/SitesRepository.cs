@@ -15,43 +15,41 @@ public class SitesRepository : ISitesRepository
 
 	public async Task<IEnumerable<Site>> GetSites(CancellationToken cancellationToken)
 	{
-		var sites = await _context.Sites.ToListAsync(cancellationToken);
-		return sites;
+		return await _context.Sites.ToListAsync(cancellationToken);
 	}
 
-	public async Task<Site> GetSite(Guid id)
+	public async Task<Site> GetSiteById(Guid id, CancellationToken cancellationToken)
 	{
-		var sites = await _context.Sites.FindAsync(id);
-		return sites;
+		return await _context.Sites.FindAsync([id], cancellationToken);
 	}
 
 	public async Task<Guid> CreateSite(Site site, CancellationToken cancellationToken)
 	{
 		await _context.Sites.AddAsync(site, cancellationToken);
-		await _context.SaveChangesAsync(cancellationToken);
-
-		return site.Id;
+		return await _context.SaveChangesAsync(cancellationToken) >= 1 ? site.Id : Guid.Empty;
 	}
 
-	public async Task<Guid> UpdateSite(Site updatedSite)
+	public async Task<Guid> UpdateSite(Site updatedSite, CancellationToken cancellationToken)
 	{
-		if (updatedSite is not null)
+		if (updatedSite is null)
 		{
-			_context.Sites.Update(updatedSite);
-			await _context.SaveChangesAsync();
+			return Guid.Empty;
 		}
 
-		return updatedSite.Id;
+		_context.Sites.Update(updatedSite);
+		return await _context.SaveChangesAsync(cancellationToken) >= 1 ? updatedSite.Id : Guid.Empty;
 	}
 
-	public async Task<Guid> DeleteSite(Guid id)
+	public async Task<Guid> DeleteSite(Guid id, CancellationToken cancellationToken)
 	{
-		var site = await _context.Sites.FindAsync(id);
+		var site = await _context.Sites.FindAsync([id], cancellationToken);
+		var guid = Guid.Empty;
+
 		if (site is not null)
 		{
 			_context.Sites.Remove(site);
-			await _context.SaveChangesAsync();
+			guid = await _context.SaveChangesAsync(cancellationToken) >= 1 ? site.Id : Guid.Empty;
 		}
-		return id;
+		return guid;
 	}
 }

@@ -17,7 +17,6 @@ internal sealed class CreateSiteCommandHandler : ICommandHandler<CreateSiteComma
 
 	public async Task<Result<Guid>> Handle(CreateSiteCommand request, CancellationToken cancellationToken)
 	{
-
 		var location = new Location(request.Latitude,
 			request.Longitude,
 			request.Address,
@@ -25,14 +24,13 @@ internal sealed class CreateSiteCommandHandler : ICommandHandler<CreateSiteComma
 			request.Region);
 
 		var newSite = await _siteFactory.CreateSite(request.Name, location, "Tester");
-		try
+		var id = await _sitesRepository.CreateSite(newSite, cancellationToken);
+
+		if (id == Guid.Empty)
 		{
-			var id = await _sitesRepository.CreateSite(newSite, cancellationToken);
-			return Result.Success(id);
+			return Result.Failure<Guid>("Error while creating the site in the database");
 		}
-		catch (Exception ex)
-		{
-			return Result.Failure<Guid>($"Error while creating the website in the database : {ex}");
-		}
+
+		return Result.Success(id);
 	}
 }

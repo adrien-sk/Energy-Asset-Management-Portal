@@ -29,7 +29,6 @@ It is actively evolving, and this README will be updated as planning, implementa
 
 🔧 Next Steps
 
-  - Implement Unit Of Work pattern and Cancellation Token
   - Add Behaviors and validations
   - Implement a Generic Repository for standard CRUD 
   - [ ... ]
