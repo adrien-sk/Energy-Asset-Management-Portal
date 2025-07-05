@@ -1,5 +1,4 @@
-﻿using EnergyPortal.Domain.Assets;
-using EnergyPortal.Domain.Common;
+﻿using EnergyPortal.Domain.Common;
 
 namespace EnergyPortal.Domain.Sites;
 
@@ -8,9 +7,6 @@ public sealed class Site : BaseEntity
 	public string Name { get; private set; } = string.Empty!;
 	public Location Location { get; private set; } = default!;
 	//public Capacity TotalCapacity { get; private set; } = default!;
-
-	private readonly List<Asset> _assets = new();
-	public List<Asset> Assets => _assets.ToList();
 
 	private Site() { }
 

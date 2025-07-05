@@ -20,7 +20,6 @@ public static class DependencyInjection
 
 		services.AddScoped<ISitesRepository, SitesRepository>();
 		services.AddScoped<IAssetsRepository, AssetsRepository>();
-		services.AddScoped<SiteFactory>();
 
 		return services;
 	}

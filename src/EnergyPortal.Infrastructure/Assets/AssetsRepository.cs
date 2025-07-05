@@ -14,50 +14,43 @@ public class AssetsRepository : IAssetsRepository
 		_context = context;
 	}
 
-	public async Task<IEnumerable<Asset>> GetAssets()
+	public async Task<IEnumerable<Asset>> GetAssetsBySite(Guid id, CancellationToken cancellationToken)
 	{
-		var assets = await _context.Assets.ToListAsync();
-		return assets;
+		return await _context.Assets.Where(a => a.SiteId == id).ToListAsync(cancellationToken);
 	}
 
-	public async Task<Asset> GetAsset(Guid id)
+	public async Task<Asset> GetAssetById(Guid id, CancellationToken cancellationToken)
 	{
-		var assets = await _context.Assets.FindAsync(id);
-		return assets;
+		return await _context.Assets.FindAsync([id], cancellationToken);
 	}
 
-	public async Task<Guid> CreateAsset(Asset asset)
+	public async Task<Guid> CreateAsset(Asset asset, CancellationToken cancellationToken)
 	{
-		await _context.Assets.AddAsync(asset);
-		await _context.SaveChangesAsync();
-
-		return asset.Id;
+		await _context.Assets.AddAsync(asset, cancellationToken);
+		return await _context.SaveChangesAsync(cancellationToken) >= 1 ? asset.Id : Guid.Empty;
 	}
 
-	public async Task<Guid> UpdateAsset(Asset updatedAsset)
+	public async Task<Guid> UpdateAsset(Asset updatedAsset, CancellationToken cancellationToken)
 	{
-		//var asset = await _context.Assets.FindAsync(updatedAsset.Id);
+		if (updatedAsset is null)
+		{
+			return Guid.Empty;
+		}
 
-		//if (asset is not null)
-		//{
-		//	asset.Update(???);
-
-		//	await _context.SaveChangesAsync();
-		//}
-
-		return updatedAsset.Id;
+		_context.Assets.Update(updatedAsset);
+		return await _context.SaveChangesAsync(cancellationToken) >= 1 ? updatedAsset.Id : Guid.Empty;
 	}
 
-	public async Task<Guid> DeleteAsset(Guid id)
+	public async Task<Guid> DeleteAsset(Guid id, CancellationToken cancellationToken)
 	{
-		var asset = await _context.Assets.FindAsync(id);
+		var asset = await _context.Assets.FindAsync([id], cancellationToken);
+		var guid = Guid.Empty;
 
 		if (asset is not null)
 		{
 			_context.Assets.Remove(asset);
-			await _context.SaveChangesAsync();
+			guid = await _context.SaveChangesAsync(cancellationToken) >= 1 ? asset.Id : Guid.Empty;
 		}
-
-		return id;
+		return guid;
 	}
 }

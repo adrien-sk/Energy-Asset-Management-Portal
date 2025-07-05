@@ -29,11 +29,6 @@ public abstract class BaseEntity
 
 	public override int GetHashCode() => Id.GetHashCode();
 
-	protected void SetCreated(string createdBy)
-	{
-		CreatedBy = createdBy;
-	}
-
 	protected void SetUpdated(string? updatedBy = null)
 	{
 		UpdatedAt = DateTime.Now;

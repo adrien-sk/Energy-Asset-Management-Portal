@@ -1,7 +1,5 @@
 ﻿using EnergyPortal.Domain.Assets;
 using EnergyPortal.Domain.Sites;
-using EnergyPortal.Infrastructure.Assets;
-using EnergyPortal.Infrastructure.Sites;
 using Microsoft.EntityFrameworkCore;
 
 namespace EnergyPortal.Infrastructure.Data;
@@ -15,7 +13,6 @@ public class ApplicationDbContext : DbContext
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
-		modelBuilder.ApplyConfiguration(new SiteConfiguration());
-		modelBuilder.ApplyConfiguration(new AssetConfiguration());
+		modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 	}
 }

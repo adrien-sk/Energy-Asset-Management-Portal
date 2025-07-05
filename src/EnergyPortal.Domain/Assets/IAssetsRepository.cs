@@ -2,9 +2,9 @@
 
 public interface IAssetsRepository
 {
-	Task<IEnumerable<Asset>> GetAssets();
-	Task<Asset> GetAsset(Guid id);
-	Task<Guid> CreateAsset(Asset asset);
-	Task<Guid> UpdateAsset(Asset asset);
-	Task<Guid> DeleteAsset(Guid id);
+	Task<IEnumerable<Asset>> GetAssetsBySite(Guid id, CancellationToken cancellationToken);
+	Task<Asset> GetAssetById(Guid id, CancellationToken cancellationToken);
+	Task<Guid> CreateAsset(Asset asset, CancellationToken cancellationToken);
+	Task<Guid> UpdateAsset(Asset asset, CancellationToken cancellationToken);
+	Task<Guid> DeleteAsset(Guid id, CancellationToken cancellationToken);
 }

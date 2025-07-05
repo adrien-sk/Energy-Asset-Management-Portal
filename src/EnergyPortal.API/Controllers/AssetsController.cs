@@ -1,52 +1,54 @@
-﻿using EnergyPortal.Application.Assets;
+﻿using EnergyPortal.Application.Assets.Queries.GetAssetsForSite;
 using EnergyPortal.Domain.Assets;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EnergyPortal.API.Controllers;
 
-[Route("api/[controller]")]
-[ApiController]
-public class AssetsController : ControllerBase
+public sealed class AssetsController : BaseApiController
 {
-	private readonly IAssetsService _assetsService;
-
-	public AssetsController(IAssetsService assetsService)
+	public AssetsController(ISender sender) : base(sender)
 	{
-		_assetsService = assetsService;
 	}
 
 	[HttpGet]
-	public async Task<ActionResult<IEnumerable<Asset>>> GetAssets()
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<ActionResult<IEnumerable<Asset>>> GetAssetsBySite(Guid id, CancellationToken cancellationToken)
 	{
-		var assets = await _assetsService.GetAssets();
-		return Ok(assets);
+		var result = await Sender.Send(new GetAssetsForSiteQuery(id), cancellationToken);
+		return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
 	}
 
 	[HttpGet("{id}")]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public async Task<ActionResult<Asset>> GetAsset(Guid id)
 	{
-		var asset = await _assetsService.GetAsset(id);
-		return Ok(asset);
+		return Ok();
 	}
 
 	[HttpPost]
+	[ProducesResponseType(StatusCodes.Status201Created)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public async Task<ActionResult<Guid>> CreateAsset(Asset asset)
 	{
-		var assetId = await _assetsService.CreateAsset(asset);
-		return Ok(assetId);
+		return Ok();
 	}
 
 	[HttpPut("{id}")]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public async Task<ActionResult<Guid>> UpdateAsset(Asset asset)
 	{
-		var updatedId = await _assetsService.UpdateAsset(asset);
 		return NoContent();
 	}
 
 	[HttpDelete("{id}")]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public async Task<ActionResult<Guid>> DeleteAsset(Guid id)
 	{
-		var deletedId = await _assetsService.DeleteAsset(id);
 		return NoContent();
 	}
 }

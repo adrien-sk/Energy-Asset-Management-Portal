@@ -1,6 +1,4 @@
-﻿using EnergyPortal.Application.Assets;
-
-namespace EnergyPortal.API;
+﻿namespace EnergyPortal.API;
 
 public static class DependencyInjection
 {
@@ -8,7 +6,6 @@ public static class DependencyInjection
 	{
 		services.AddOpenApi();
 		services.AddControllers();
-		services.AddScoped<IAssetsService, AssetsService>();
 
 		return services;
 	}
