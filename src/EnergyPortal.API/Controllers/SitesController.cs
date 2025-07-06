@@ -36,7 +36,6 @@ public sealed class SitesController : BaseApiController
 	}
 
 	[HttpGet("{id}/assets")]
-	[HttpGet]
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	[ProducesResponseType(StatusCodes.Status400BadRequest)]
 	public async Task<ActionResult<IEnumerable<Asset>>> GetAssetsBySite(Guid id, CancellationToken cancellationToken)

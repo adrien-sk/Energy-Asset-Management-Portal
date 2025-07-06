@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration));
 
 builder.Services
-	.AddPresentation()
+	.AddPresentation(builder.Configuration)
 	.AddApplication()
 	.AddInfrastructure(builder.Configuration);
 
@@ -23,9 +23,11 @@ if (app.Environment.IsDevelopment())
 		options.SwaggerEndpoint("/openapi/v1.json", "Energy Portal API");
 	});
 }
+
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseSerilogRequestLogging();
 app.UseHttpsRedirection();
 app.MapControllers();
+app.UseCors();
 
 app.Run();
