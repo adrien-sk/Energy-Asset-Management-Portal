@@ -15,11 +15,11 @@ internal sealed class DeleteSiteCommandHandler : ICommandHandler<DeleteSiteComma
 
 	public async Task<Result> Handle(DeleteSiteCommand request, CancellationToken cancellationToken)
 	{
-		var id = await _sitesRepository.DeleteSite(request.id, cancellationToken);
+		var id = await _sitesRepository.DeleteSite(request.Id, cancellationToken);
 
 		if (id == Guid.Empty)
 		{
-			return Result.Failure($"Error while deleting the site in the database : {request.id}");
+			return Result.Failure($"Error while deleting the site in the database : {request.Id}");
 		}
 
 		return Result.Success();

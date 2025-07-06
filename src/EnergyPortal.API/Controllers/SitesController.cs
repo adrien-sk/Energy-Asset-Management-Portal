@@ -1,8 +1,10 @@
 ﻿using EnergyPortal.Application.Sites.Commands.CreateSite;
 using EnergyPortal.Application.Sites.Commands.DeleteSite;
 using EnergyPortal.Application.Sites.Commands.UpdateSite;
+using EnergyPortal.Application.Sites.Queries.GetAssetsForSite;
 using EnergyPortal.Application.Sites.Queries.GetSite;
 using EnergyPortal.Application.Sites.Queries.GetSiteById;
+using EnergyPortal.Domain.Assets;
 using EnergyPortal.Domain.Sites;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +23,7 @@ public sealed class SitesController : BaseApiController
 	public async Task<ActionResult<IEnumerable<Site>>> GetSites(CancellationToken cancellationToken)
 	{
 		var result = await Sender.Send(new GetSitesQuery(), cancellationToken);
-		return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
 	}
 
 	[HttpGet("{id}")]
@@ -30,7 +32,17 @@ public sealed class SitesController : BaseApiController
 	public async Task<ActionResult<Site>> GetSite(Guid id, CancellationToken cancellationToken)
 	{
 		var result = await Sender.Send(new GetSiteByIdQuery(id), cancellationToken);
-		return result.IsSuccess ? Ok(result) : BadRequest(result.Error);
+		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
+	}
+
+	[HttpGet("{id}/assets")]
+	[HttpGet]
+	[ProducesResponseType(StatusCodes.Status200OK)]
+	[ProducesResponseType(StatusCodes.Status400BadRequest)]
+	public async Task<ActionResult<IEnumerable<Asset>>> GetAssetsBySite(Guid id, CancellationToken cancellationToken)
+	{
+		var result = await Sender.Send(new GetAssetsForSiteQuery(id), cancellationToken);
+		return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
 	}
 
 	[HttpPost]

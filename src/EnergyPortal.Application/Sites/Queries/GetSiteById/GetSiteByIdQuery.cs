@@ -4,4 +4,4 @@ using EnergyPortal.Domain.Sites;
 namespace EnergyPortal.Application.Sites.Queries.GetSiteById;
 
 public sealed record GetSiteByIdQuery(
-	Guid id) : IQuery<Site>;
+	Guid Id) : IQuery<Site>;

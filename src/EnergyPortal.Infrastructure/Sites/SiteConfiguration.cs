@@ -1,4 +1,5 @@
-﻿using EnergyPortal.Domain.Sites;
+﻿using EnergyPortal.Domain.Assets;
+using EnergyPortal.Domain.Sites;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,43 +9,22 @@ public class SiteConfiguration : IEntityTypeConfiguration<Site>
 {
 	public void Configure(EntityTypeBuilder<Site> builder)
 	{
-		//builder.OwnsOne(s => s.TotalCapacity, capacity =>
-		//{
-		//	capacity.Property(c => c.Output)
-		//		.HasColumnName("TotalCapacity_Output")
-		//		.HasPrecision(18, 2)
-		//		.IsRequired();
+		builder.HasKey(s => s.Id);
 
-		//	capacity.Property(c => c.Unit)
-		//		.HasColumnName("TotalCapacity_Unit")
-		//		.HasMaxLength(10)
-		//		.IsRequired()
-		//		.HasConversion(
-		//			unit => unit.ToString(),
-		//			value => Enum.Parse<CapacityUnit>(value));
-		//});
+		builder.Property(s => s.Id)
+			.IsRequired();
 
-		builder.OwnsOne(s => s.Location, location =>
-		{
-			location.Property(l => l.Latitude)
-				.HasColumnName("Latitude")
-				.HasPrecision(10, 7);
+		builder.Property(s => s.CreatedAt)
+			.IsRequired();
 
-			location.Property(l => l.Longitude)
-				.HasColumnName("Longitude")
-				.HasPrecision(10, 7);
+		builder.ComplexProperty(s => s.Location);
 
-			location.Property(l => l.Address)
-				.HasColumnName("Address")
-				.HasMaxLength(500);
+		builder.HasMany<Asset>()
+			.WithOne()
+			.HasForeignKey(a => a.SiteId)
+			.OnDelete(DeleteBehavior.Cascade);
 
-			location.Property(l => l.City)
-				.HasColumnName("City")
-				.HasMaxLength(500);
-
-			location.Property(l => l.Region)
-				.HasColumnName("Region")
-				.HasMaxLength(500);
-		});
+		builder.HasIndex(s => s.Name)
+			.HasDatabaseName("IX_Sites_Name");
 	}
 }

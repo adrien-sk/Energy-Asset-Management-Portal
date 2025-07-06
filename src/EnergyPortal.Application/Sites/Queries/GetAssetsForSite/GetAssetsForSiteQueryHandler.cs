@@ -3,7 +3,7 @@ using EnergyPortal.Domain.Assets;
 using EnergyPortal.Domain.Common;
 using EnergyPortal.Domain.Sites;
 
-namespace EnergyPortal.Application.Assets.Queries.GetAssetsForSite;
+namespace EnergyPortal.Application.Sites.Queries.GetAssetsForSite;
 
 internal sealed class GetAssetsForSiteQueryHandler : IQueryHandler<GetAssetsForSiteQuery, IEnumerable<Asset>>
 {
@@ -17,7 +17,7 @@ internal sealed class GetAssetsForSiteQueryHandler : IQueryHandler<GetAssetsForS
 	}
 	public async Task<Result<IEnumerable<Asset>>> Handle(GetAssetsForSiteQuery request, CancellationToken cancellationToken)
 	{
-		var site = await _sitesRepository.GetSiteById(request.id, cancellationToken);
+		var site = await _sitesRepository.GetSiteById(request.Id, cancellationToken);
 
 		if (site == null) return Result.Failure<IEnumerable<Asset>>("Site not found");
 

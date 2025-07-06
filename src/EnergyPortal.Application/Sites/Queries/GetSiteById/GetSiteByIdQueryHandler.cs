@@ -14,11 +14,11 @@ internal sealed class GetSiteByIdQueryHandler : IQueryHandler<GetSiteByIdQuery, 
 	}
 	public async Task<Result<Site>> Handle(GetSiteByIdQuery request, CancellationToken cancellationToken)
 	{
-		var site = await _sitesRepository.GetSiteById(request.id, cancellationToken);
+		var site = await _sitesRepository.GetSiteById(request.Id, cancellationToken);
 
 		if (site == null)
 		{
-			return Result.Failure<Site>($"Cannot retrieve Site from database for id : {request.id}");
+			return Result.Failure<Site>($"Cannot retrieve Site from database for id : {request.Id}");
 		}
 
 		return Result.Success(site);

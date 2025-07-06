@@ -1,5 +1,4 @@
 ﻿using EnergyPortal.Domain.Assets;
-using EnergyPortal.Domain.Common.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,26 +8,46 @@ public class AssetConfiguration : IEntityTypeConfiguration<Asset>
 {
 	public void Configure(EntityTypeBuilder<Asset> builder)
 	{
+		builder.HasKey(a => a.Id);
+
 		builder.HasDiscriminator<string>("AssetType")
 			.HasValue<SolarPanel>("SolarPanel")
 			.HasValue<Battery>("Battery")
 			.HasValue<Inverter>("Inverter");
 
-		// Configure Capacity as owned entity
-		builder.OwnsOne(a => a.Capacity, capacity =>
+		builder.Property(a => a.Id)
+			.IsRequired();
+
+		builder.Property(a => a.CreatedAt)
+			.IsRequired();
+
+		builder.Property(a => a.SiteId)
+			.IsRequired();
+
+		builder.Property(a => a.Type)
+			.HasConversion<string>()
+			.IsRequired();
+
+		builder.ComplexProperty(a => a.Capacity, capacityBuilder =>
 		{
-			capacity.Property(c => c.Output)
-				.HasColumnName("Capacity_Output")
-				.HasPrecision(18, 2)
+			capacityBuilder.Property(c => c.Output)
+				.HasColumnName("CapacityValue")
+				.HasColumnType("decimal(18,2)")
 				.IsRequired();
 
-			capacity.Property(c => c.Unit)
-				.HasColumnName("Capacity_Unit")
+			capacityBuilder.Property(c => c.Unit)
+				.HasColumnName("CapacityUnit")
 				.HasMaxLength(10)
-				.IsRequired()
-				.HasConversion(
-					unit => unit.ToString(),
-					value => Enum.Parse<CapacityUnit>(value));
+				.IsRequired();
 		});
+
+		builder.HasIndex(a => a.SiteId)
+			.HasDatabaseName("IX_Assets_SiteId");
+
+		builder.HasIndex(a => a.Status)
+			.HasDatabaseName("IX_Assets_Status");
+
+		builder.HasIndex(a => a.Type)
+			.HasDatabaseName("IX_Assets_Type");
 	}
 }

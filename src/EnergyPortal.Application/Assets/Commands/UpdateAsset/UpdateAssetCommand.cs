@@ -2,9 +2,11 @@
 using EnergyPortal.Domain.Assets;
 using EnergyPortal.Domain.Common.ValueObjects;
 
-namespace EnergyPortal.Application.Assets.Commands.CreateAsset;
+namespace EnergyPortal.Application.Assets.Commands.UpdateAsset;
 
-public sealed record CreateAssetCommand(
+public sealed record UpdateAssetCommand(
+	Guid Id,
+
 	decimal TiltAngle,
 	decimal Azimuth,
 
@@ -28,4 +30,4 @@ public sealed record CreateAssetCommand(
 	Capacity Capacity,
 	DateTime InstallationDate,
 	string Manufacturer,
-	string Model) : ICommand<Guid>;
+	string Model) : ICommand;

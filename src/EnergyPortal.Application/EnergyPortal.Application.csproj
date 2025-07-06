@@ -14,4 +14,8 @@
     <ProjectReference Include="..\EnergyPortal.Domain\EnergyPortal.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Assets\Queries\" />
+  </ItemGroup>
+
 </Project>

@@ -3,4 +3,4 @@
 namespace EnergyPortal.Application.Sites.Commands.DeleteSite;
 
 public sealed record DeleteSiteCommand(
-	Guid id) : ICommand;
+	Guid Id) : ICommand;

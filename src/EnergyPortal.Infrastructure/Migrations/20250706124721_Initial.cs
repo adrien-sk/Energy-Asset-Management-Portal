@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EnergyPortal.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,12 +16,12 @@ namespace EnergyPortal.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Latitude = table.Column<decimal>(type: "decimal(10,7)", precision: 10, scale: 7, nullable: false),
-                    Longitude = table.Column<decimal>(type: "decimal(10,7)", precision: 10, scale: 7, nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    City = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Region = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Location_Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location_City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Location_Latitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Location_Longitude = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Location_Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -37,16 +37,15 @@ namespace EnergyPortal.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Capacity_Output = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    Capacity_Unit = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     SiteId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     InstallationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AssetType = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    CapacityValue = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CapacityUnit = table.Column<int>(type: "int", maxLength: 10, nullable: false),
                     CurrentCharge = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ChargeCapacity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     MaxChargeRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
@@ -82,6 +81,21 @@ namespace EnergyPortal.Infrastructure.Migrations
                 name: "IX_Assets_SiteId",
                 table: "Assets",
                 column: "SiteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Assets_Status",
+                table: "Assets",
+                column: "Status");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Assets_Type",
+                table: "Assets",
+                column: "Type");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sites_Name",
+                table: "Sites",
+                column: "Name");
         }
 
         /// <inheritdoc />

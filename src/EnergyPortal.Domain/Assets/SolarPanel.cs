@@ -28,6 +28,7 @@ public sealed class SolarPanel : Asset
 	public void Update(
 		decimal tiltAngle,
 		decimal azimuth,
+		Guid siteId,
 		AssetStatus status,
 		AssetType type,
 		Capacity capacity,

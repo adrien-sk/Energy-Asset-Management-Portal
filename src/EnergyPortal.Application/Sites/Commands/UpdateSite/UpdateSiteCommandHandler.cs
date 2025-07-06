@@ -15,11 +15,11 @@ internal sealed class UpdateSiteCommandHandler : ICommandHandler<UpdateSiteComma
 
 	public async Task<Result> Handle(UpdateSiteCommand request, CancellationToken cancellationToken)
 	{
-		var site = await _sitesRepository.GetSiteById(request.id, cancellationToken);
+		var site = await _sitesRepository.GetSiteById(request.Id, cancellationToken);
 
 		if (site == null)
 		{
-			return Result.Failure<Site>($"Cannot retrieve Site from database for id : {request.id}");
+			return Result.Failure<Site>($"Cannot retrieve Site from database for id : {request.Id}");
 		}
 
 		var location = new Location(request.Latitude,
@@ -35,7 +35,7 @@ internal sealed class UpdateSiteCommandHandler : ICommandHandler<UpdateSiteComma
 
 		if (id == Guid.Empty)
 		{
-			return Result.Failure<Guid>($"Error while updating the site in the database : {request.id}");
+			return Result.Failure<Guid>($"Error while updating the site in the database : {request.Id}");
 		}
 
 		return Result.Success(id);
